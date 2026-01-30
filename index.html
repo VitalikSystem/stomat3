@@ -13,18 +13,20 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         h1, h2, h3 { font-family: 'Playfair Display', serif; }
-        .nav-scrolled { background-color: rgba(255, 255, 255, 0.95); box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); padding-top: 0.75rem; padding-bottom: 0.75rem; }
+        .nav-scrolled { background-color: rgba(255, 255, 255, 0.98); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); padding-top: 0.5rem; padding-bottom: 0.5rem; }
         .nav-scrolled .nav-link { color: #0f172a; }
-        .nav-scrolled .nav-logo-bg { background-color: #0d9488; }
-        .nav-scrolled .nav-logo-text { color: white; }
         .nav-scrolled .nav-brand-text { color: #042f2e; }
         .nav-scrolled .mobile-menu-btn { color: #0d9488; }
         
-        @keyframes bounce-slow {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        .animate-bounce-slow { animation: bounce-slow 3s infinite ease-in-out; }
+        .logo-container { transition: all 0.3s ease; }
+        .nav-scrolled .logo-container { transform: scale(0.9); }
+        
+        /* Ефект для карток при наведенні */
+        .doctor-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .doctor-card:hover { transform: translateY(-10px); }
+        
+        /* Плейсхолдер для зображень, поки вони не завантажені */
+        img { background-color: #f1f5f9; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
@@ -32,11 +34,14 @@
     <!-- Navigation -->
     <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent py-5">
         <div class="container mx-auto px-4 md:px-8 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <div class="nav-logo-bg w-10 h-10 rounded-full flex items-center justify-center bg-white transition-colors">
-                    <span class="nav-logo-text text-xl font-bold text-teal-600 transition-colors">Д</span>
-                </div>
-                <span class="nav-brand-text text-xl font-bold tracking-tight text-white transition-colors">ДЕНТЕЯ</span>
+            <div class="flex items-center">
+                <a href="#" class="flex items-center space-x-4 group">
+                    <div class="logo-container bg-white p-1 rounded-xl shadow-lg">
+                        <!-- Зверніть увагу: файл має називатися logo.jpg -->
+                        <img src="logo.jpg" alt="Дентея" class="h-14 w-auto object-contain rounded-lg">
+                    </div>
+                    <span class="nav-brand-text text-2xl font-bold tracking-tight text-white transition-colors hidden lg:block">ДЕНТЕЯ</span>
+                </a>
             </div>
 
             <!-- Desktop Nav -->
@@ -45,49 +50,51 @@
                 <a href="#team" class="nav-link font-medium text-white hover:text-teal-400 transition-colors">Команда</a>
                 <a href="#lab" class="nav-link font-medium text-white hover:text-teal-400 transition-colors">Лабораторія</a>
                 <a href="#contacts" class="nav-link font-medium text-white hover:text-teal-400 transition-colors">Контакти</a>
-                <a href="tel:0979925212" class="bg-teal-600 hover:bg-teal-700 text-white px-5 py-2 rounded-full font-semibold shadow-lg transition-transform hover:scale-105 active:scale-95">
+                <a href="tel:0979925212" class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-full font-semibold shadow-xl transition-all hover:scale-105 active:scale-95">
                     Записатись
                 </a>
             </div>
 
             <!-- Mobile Toggle -->
-            <button id="menu-toggle" class="md:hidden text-white mobile-menu-btn">
-                <i data-lucide="menu" size="28"></i>
+            <button id="menu-toggle" class="md:hidden text-white mobile-menu-btn p-2">
+                <i data-lucide="menu" size="32"></i>
             </button>
         </div>
 
         <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white shadow-xl">
-            <div class="flex flex-col p-6 space-y-4 text-center">
-                <a href="#services" class="mobile-link text-slate-800 text-lg font-medium py-2 border-b border-slate-100">Послуги</a>
-                <a href="#team" class="mobile-link text-slate-800 text-lg font-medium py-2 border-b border-slate-100">Команда</a>
-                <a href="#lab" class="mobile-link text-slate-800 text-lg font-medium py-2 border-b border-slate-100">Лабораторія</a>
-                <a href="#contacts" class="mobile-link text-slate-800 text-lg font-medium py-2 border-b border-slate-100">Контакти</a>
-                <div class="pt-4 flex justify-center space-x-6">
-                    <a href="https://www.instagram.com/denteya.stomatology" class="text-pink-600"><i data-lucide="instagram"></i></a>
-                    <a href="https://www.facebook.com/profile.php?id=61574048183508" class="text-blue-600"><i data-lucide="facebook"></i></a>
-                    <a href="https://t.me/+380979925212" class="text-sky-500"><i data-lucide="send"></i></a>
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white shadow-2xl animate-in fade-in slide-in-from-top-4">
+            <div class="flex flex-col p-8 space-y-6 text-center border-t border-slate-100">
+                <a href="#services" class="mobile-link text-slate-800 text-xl font-semibold">Послуги</a>
+                <a href="#team" class="mobile-link text-slate-800 text-xl font-semibold">Команда</a>
+                <a href="#lab" class="mobile-link text-slate-800 text-xl font-semibold">Лабораторія</a>
+                <a href="#contacts" class="mobile-link text-slate-800 text-xl font-semibold">Контакти</a>
+                <div class="pt-6 flex justify-center space-x-8">
+                    <a href="https://www.instagram.com/denteya.stomatology" target="_blank" class="text-pink-600 transform hover:scale-110 transition-transform"><i data-lucide="instagram" size="32"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61574048183508" target="_blank" class="text-blue-600 transform hover:scale-110 transition-transform"><i data-lucide="facebook" size="32"></i></a>
+                    <a href="https://t.me/+380979925212" target="_blank" class="text-sky-500 transform hover:scale-110 transition-transform"><i data-lucide="send" size="32"></i></a>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative h-[85vh] flex items-center overflow-hidden">
+    <section class="relative h-[90vh] flex items-center overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Modern clinic" class="w-full h-full object-cover brightness-[0.4]">
+            <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Modern clinic" class="w-full h-full object-cover brightness-[0.35]">
         </div>
         <div class="container mx-auto px-4 md:px-8 relative z-10">
-            <div class="max-w-3xl">
-                <h4 class="text-teal-400 font-bold tracking-widest uppercase mb-4">Стоматологія Дентея</h4>
-                <h1 class="text-5xl md:text-7xl text-white font-bold leading-tight mb-6">Створюємо посмішки, які надихають</h1>
-                <p class="text-xl text-slate-200 mb-10 max-w-xl">Повний комплекс стоматологічних послуг у Запоріжжі. Власна лабораторія, команда професіоналів та новітнє обладнання.</p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="tel:0979925212" class="bg-teal-600 hover:bg-teal-700 text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center justify-center transition-all">
-                        <i data-lucide="phone" class="mr-2" size="20"></i> Записатись на прийом
+            <div class="max-w-4xl">
+                <div class="inline-block px-4 py-1 bg-teal-600/20 backdrop-blur-md border border-teal-500/30 text-teal-400 font-bold tracking-[0.2em] uppercase mb-6 rounded-lg">
+                    Стоматологія Дентея
+                </div>
+                <h1 class="text-5xl md:text-8xl text-white font-bold leading-tight mb-8">Створюємо посмішки,<br><span class="text-teal-400">що надихають</span></h1>
+                <p class="text-xl md:text-2xl text-slate-200 mb-12 max-w-2xl leading-relaxed font-light">Повний комплекс послуг у Запоріжжі. Власна лабораторія, досвідчені лікарі та турбота про ваш комфорт з 2002 року.</p>
+                <div class="flex flex-col sm:flex-row gap-6">
+                    <a href="tel:0979925212" class="bg-teal-600 hover:bg-teal-700 text-white px-10 py-5 rounded-2xl font-bold text-xl flex items-center justify-center transition-all shadow-2xl shadow-teal-900/40 hover:-translate-y-1">
+                        <i data-lucide="phone-call" class="mr-3" size="24"></i> Записатись зараз
                     </a>
-                    <a href="#services" class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-xl font-bold text-lg flex items-center justify-center transition-all">
-                        Наші послуги <i data-lucide="chevron-right" class="ml-2" size={20}></i>
+                    <a href="#services" class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 px-10 py-5 rounded-2xl font-bold text-xl flex items-center justify-center transition-all hover:border-white/40">
+                        Наші послуги <i data-lucide="arrow-down" class="ml-3 animate-bounce" size="24"></i>
                     </a>
                 </div>
             </div>
@@ -95,125 +102,138 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-24 bg-white">
+    <section id="services" class="py-32 bg-white">
         <div class="container mx-auto px-4 md:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Наші Послуги</h2>
-                <div class="w-20 h-1 bg-teal-600 mx-auto rounded-full mb-6"></div>
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-6xl font-bold text-slate-900 mb-6">Наші Послуги</h2>
+                <div class="w-24 h-1.5 bg-teal-600 mx-auto rounded-full"></div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="group p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:bg-teal-600 transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="w-16 h-16 bg-teal-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-teal-500 transition-colors">
-                        <i data-lucide="shield-check" class="text-teal-600 group-hover:text-white" size="32"></i>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                <div class="group p-10 rounded-3xl bg-slate-50 border border-slate-100 hover:bg-teal-600 transition-all duration-500 transform hover:-translate-y-3 hover:shadow-2xl">
+                    <div class="w-20 h-20 bg-teal-100 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-teal-500 transition-colors">
+                        <i data-lucide="shield-check" class="text-teal-600 group-hover:text-white" size="40"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-slate-900 mb-4 group-hover:text-white">Терапія</h3>
-                    <p class="text-slate-600 group-hover:text-teal-50">Лікування карієсу, реставрація зубів та ендодонтія з використанням сучасних матеріалів.</p>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-5 group-hover:text-white transition-colors">Терапія</h3>
+                    <p class="text-slate-600 group-hover:text-teal-50 text-lg leading-relaxed">Професійне лікування карієсу та каналів під мікроскопом.</p>
                 </div>
-                <div class="group p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:bg-teal-600 transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="w-16 h-16 bg-teal-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-teal-500 transition-colors">
-                        <i data-lucide="sparkles" class="text-teal-600 group-hover:text-white" size="32"></i>
+                <div class="group p-10 rounded-3xl bg-slate-50 border border-slate-100 hover:bg-teal-600 transition-all duration-500 transform hover:-translate-y-3 hover:shadow-2xl">
+                    <div class="w-20 h-20 bg-teal-100 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-teal-500 transition-colors">
+                        <i data-lucide="sparkles" class="text-teal-600 group-hover:text-white" size="40"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-slate-900 mb-4 group-hover:text-white">Ортодонтія</h3>
-                    <p class="text-slate-600 group-hover:text-teal-50">Виправлення прикусу за допомогою брекет-систем та елайнерів для ідеальної посмішки.</p>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-5 group-hover:text-white transition-colors">Ортодонтія</h3>
+                    <p class="text-slate-600 group-hover:text-teal-50 text-lg leading-relaxed">Виправлення прикусу будь-якої складності (брекети, елайнери).</p>
                 </div>
-                <div class="group p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:bg-teal-600 transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="w-16 h-16 bg-teal-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-teal-500 transition-colors">
-                        <i data-lucide="activity" class="text-teal-600 group-hover:text-white" size="32"></i>
+                <div class="group p-10 rounded-3xl bg-slate-50 border border-slate-100 hover:bg-teal-600 transition-all duration-500 transform hover:-translate-y-3 hover:shadow-2xl">
+                    <div class="w-20 h-20 bg-teal-100 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-teal-500 transition-colors">
+                        <i data-lucide="activity" class="text-teal-600 group-hover:text-white" size="40"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-slate-900 mb-4 group-hover:text-white">Хірургія</h3>
-                    <p class="text-slate-600 group-hover:text-teal-50">Безболісне видалення зубів та відновлення зубного ряду сучасними імплантатами.</p>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-5 group-hover:text-white transition-colors">Хірургія</h3>
+                    <p class="text-slate-600 group-hover:text-teal-50 text-lg leading-relaxed">Безболісна імплантація та видалення зубів мудрості.</p>
                 </div>
-                <div class="group p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:bg-teal-600 transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="w-16 h-16 bg-teal-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-teal-500 transition-colors">
-                        <i data-lucide="heart-pulse" class="text-teal-600 group-hover:text-white" size="32"></i>
+                <div class="group p-10 rounded-3xl bg-slate-50 border border-slate-100 hover:bg-teal-600 transition-all duration-500 transform hover:-translate-y-3 hover:shadow-2xl">
+                    <div class="w-20 h-20 bg-teal-100 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-teal-500 transition-colors">
+                        <i data-lucide="heart-pulse" class="text-teal-600 group-hover:text-white" size="40"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-slate-900 mb-4 group-hover:text-white">Гігієна</h3>
-                    <p class="text-slate-600 group-hover:text-teal-50">Професійна чистка Air Flow, ультразвук та безпечне кабінетне відбілювання.</p>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-5 group-hover:text-white transition-colors">Гігієна</h3>
+                    <p class="text-slate-600 group-hover:text-teal-50 text-lg leading-relaxed">Професійна чистка та відбілювання для ідеального здоров'я ясен.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Lab Section -->
-    <section id="lab" class="py-24 bg-slate-900 text-white relative overflow-hidden">
-        <div class="container mx-auto px-4 md:px-8 flex flex-col lg:flex-row items-center gap-16">
-            <div class="flex-1 space-y-8 relative z-10">
-                <div class="inline-flex items-center px-4 py-2 rounded-full bg-teal-500/20 border border-teal-500/30 text-teal-400 font-semibold text-sm mb-4">
-                    <i data-lucide="microscope" class="mr-2" size="16"></i> Власна технічна лабораторія
+    <section id="lab" class="py-32 bg-slate-900 text-white relative overflow-hidden">
+        <div class="container mx-auto px-4 md:px-8 flex flex-col lg:flex-row items-center gap-20">
+            <div class="flex-1 space-y-10 relative z-10">
+                <div class="inline-flex items-center px-5 py-2 rounded-full bg-teal-500/20 border border-teal-500/30 text-teal-400 font-bold text-sm tracking-widest uppercase">
+                    <i data-lucide="microscope" class="mr-3" size="20"></i> Цифрова лабораторія
                 </div>
-                <h2 class="text-4xl md:text-5xl font-bold leading-tight">Ми контролюємо якість на кожному етапі</h2>
-                <p class="text-slate-400 text-lg leading-relaxed">Наявність власної зуботехнічної лабораторії дозволяє нам виготовляти коронки, вініри та протези у максимально стислі терміни.</p>
-                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <li class="flex items-center text-slate-300"><div class="w-2 h-2 rounded-full bg-teal-500 mr-3"></div>Цифрове сканування</li>
-                    <li class="flex items-center text-slate-300"><div class="w-2 h-2 rounded-full bg-teal-500 mr-3"></div>CAD/CAM технології</li>
-                    <li class="flex items-center text-slate-300"><div class="w-2 h-2 rounded-full bg-teal-500 mr-3"></div>Безметалева кераміка</li>
-                    <li class="flex items-center text-slate-300"><div class="w-2 h-2 rounded-full bg-teal-500 mr-3"></div>Цирконієві коронки</li>
-                </ul>
+                <h2 class="text-4xl md:text-6xl font-bold leading-tight">Власне виробництво — гарантія швидкості</h2>
+                <p class="text-slate-400 text-xl leading-relaxed">Наявність власної зуботехнічної лабораторії дозволяє нам контролювати естетику та точність кожної коронки чи вініра без посередників.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="flex items-center space-x-4 p-4 bg-white/5 rounded-2xl border border-white/10">
+                        <i data-lucide="check-circle-2" class="text-teal-500"></i>
+                        <span class="text-lg">CAD/CAM фрезерування</span>
+                    </div>
+                    <div class="flex items-center space-x-4 p-4 bg-white/5 rounded-2xl border border-white/10">
+                        <i data-lucide="check-circle-2" class="text-teal-500"></i>
+                        <span class="text-lg">3D-друк моделей</span>
+                    </div>
+                    <div class="flex items-center space-x-4 p-4 bg-white/5 rounded-2xl border border-white/10">
+                        <i data-lucide="check-circle-2" class="text-teal-500"></i>
+                        <span class="text-lg">Цирконієві коронки</span>
+                    </div>
+                    <div class="flex items-center space-x-4 p-4 bg-white/5 rounded-2xl border border-white/10">
+                        <i data-lucide="check-circle-2" class="text-teal-500"></i>
+                        <span class="text-lg">Кераміка E-max</span>
+                    </div>
+                </div>
             </div>
-            <div class="flex-1">
-                <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Dental lab" class="w-full h-[400px] object-cover rounded-3xl shadow-2xl transform rotate-2">
+            <div class="flex-1 relative group">
+                <div class="absolute inset-0 bg-teal-600 rounded-3xl blur-3xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Dental lab" class="relative w-full h-[500px] object-cover rounded-3xl shadow-2xl transition-transform duration-700 group-hover:scale-[1.02]">
             </div>
         </div>
     </section>
 
     <!-- Team Section -->
-    <section id="team" class="py-24 bg-white">
+    <section id="team" class="py-32 bg-white">
         <div class="container mx-auto px-4 md:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Наші Фахівці</h2>
-                <div class="w-20 h-1 bg-teal-600 mx-auto rounded-full mb-6"></div>
-                <div class="flex items-center justify-center space-x-2 text-teal-600 mb-4 font-semibold uppercase tracking-widest text-sm">
-                    <i data-lucide="users" size="20"></i>
-                    <span>Команда професіоналів</span>
-                </div>
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-6xl font-bold text-slate-900 mb-6">Наші Фахівці</h2>
+                <div class="w-24 h-1.5 bg-teal-600 mx-auto rounded-full mb-8"></div>
+                <p class="text-slate-500 text-xl max-w-2xl mx-auto">Лікарі, які люблять свою справу та постійно вдосконалюють свої навички.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-                <!-- Doctor 1 -->
-                <div class="group bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-100">
-                    <div class="h-[350px] overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1559839734-2b71f1536783?auto=format&fit=crop&w=800&q=80" alt="Пальчик Оксана Олександрівна" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute top-4 left-4">
-                            <span class="px-3 py-1 bg-white/90 backdrop-blur-sm text-teal-600 font-bold text-[10px] uppercase tracking-widest rounded-full shadow-sm">Стоматолог-ортодонт</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+                <!-- Doctor 1: Пальчик -->
+                <div class="doctor-card group bg-slate-50 rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl border border-slate-100">
+                    <div class="h-[450px] overflow-hidden relative bg-slate-200">
+                        <!-- Файл має називатися photo_5348583036851181983_y.jpg -->
+                        <img src="photo_5348583036851181983_y.jpg" alt="Пальчик Оксана Олександрівна" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute top-6 left-6">
+                            <span class="px-4 py-1.5 bg-white/95 backdrop-blur-md text-teal-600 font-bold text-xs uppercase tracking-[0.15em] rounded-full shadow-lg">Стоматолог-ортодонт</span>
                         </div>
                     </div>
-                    <div class="p-8">
-                        <h3 class="text-xl font-bold text-slate-900 mb-4 group-hover:text-teal-600 transition-colors">Пальчик Оксана Олександрівна</h3>
-                        <div class="flex items-start space-x-3">
-                            <i data-lucide="graduation-cap" size="18" class="text-teal-600 mt-1 flex-shrink-0"></i>
-                            <p class="text-slate-600 text-sm">Вища медична освіта (ЗДМФУ). Спеціалізація: Ортодонтія. Робота з брекет-системами та елайнерами.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Doctor 2 -->
-                <div class="group bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-100">
-                    <div class="h-[350px] overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=800&q=80" alt="Лазорко Мар'ян Мар'янович" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute top-4 left-4">
-                            <span class="px-3 py-1 bg-white/90 backdrop-blur-sm text-teal-600 font-bold text-[10px] uppercase tracking-widest rounded-full shadow-sm">Стоматолог-ортопед</span>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-xl font-bold text-slate-900 mb-4 group-hover:text-teal-600 transition-colors">Лазорко Мар'ян Мар'янович</h3>
-                        <div class="flex items-start space-x-3">
-                            <i data-lucide="graduation-cap" size="18" class="text-teal-600 mt-1 flex-shrink-0"></i>
-                            <p class="text-slate-600 text-sm">Вища медична освіта (ЗДМФУ). Експерт у естетичному протезуванні, робота з вінірами та безметалевою керамікою.</p>
+                    <div class="p-10">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-5 group-hover:text-teal-600 transition-colors leading-tight">Пальчик<br>Оксана Олександрівна</h3>
+                        <div class="flex items-start space-x-4 p-4 bg-white rounded-2xl border border-slate-100 shadow-sm">
+                            <i data-lucide="graduation-cap" size="24" class="text-teal-600 flex-shrink-0"></i>
+                            <p class="text-slate-600 text-sm leading-relaxed">Вища медична освіта (ЗДМФУ). Провідний спеціаліст з виправлення прикусу та цифрового планування.</p>
                         </div>
                     </div>
                 </div>
-                <!-- Doctor 3 -->
-                <div class="group bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-100">
-                    <div class="h-[350px] overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=800&q=80" alt="Семенов Денис Михайлович" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute top-4 left-4">
-                            <span class="px-3 py-1 bg-white/90 backdrop-blur-sm text-teal-600 font-bold text-[10px] uppercase tracking-widest rounded-full shadow-sm">Щелепно-лицевий хірург</span>
+
+                <!-- Doctor 2: Лазорко -->
+                <div class="doctor-card group bg-slate-50 rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl border border-slate-100">
+                    <div class="h-[450px] overflow-hidden relative bg-slate-200">
+                        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=800&q=80" alt="Лазорко Мар'ян Мар'янович" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute top-6 left-6">
+                            <span class="px-4 py-1.5 bg-white/95 backdrop-blur-md text-teal-600 font-bold text-xs uppercase tracking-[0.15em] rounded-full shadow-lg">Стоматолог-ортопед</span>
                         </div>
                     </div>
-                    <div class="p-8">
-                        <h3 class="text-xl font-bold text-slate-900 mb-4 group-hover:text-teal-600 transition-colors">Семенов Денис Михайлович</h3>
-                        <div class="flex items-start space-x-3">
-                            <i data-lucide="graduation-cap" size="18" class="text-teal-600 mt-1 flex-shrink-0"></i>
-                            <p class="text-slate-600 text-sm">Спеціалізація зі щелепно-лицевої хірургії. Кваліфікований фахівець з дентальної імплантації та кісткової пластики.</p>
+                    <div class="p-10">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-5 group-hover:text-teal-600 transition-colors leading-tight">Лазорко<br>Мар'ян Мар'янович</h3>
+                        <div class="flex items-start space-x-4 p-4 bg-white rounded-2xl border border-slate-100 shadow-sm">
+                            <i data-lucide="graduation-cap" size="24" class="text-teal-600 flex-shrink-0"></i>
+                            <p class="text-slate-600 text-sm leading-relaxed">Експерт з естетичного протезування. Спеціалізується на вінірах та безметалевих конструкціях.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doctor 3: Семенов -->
+                <div class="doctor-card group bg-slate-50 rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl border border-slate-100">
+                    <div class="h-[450px] overflow-hidden relative bg-slate-200">
+                        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=800&q=80" alt="Семенов Денис Михайлович" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute top-6 left-6">
+                            <span class="px-4 py-1.5 bg-white/95 backdrop-blur-md text-teal-600 font-bold text-xs uppercase tracking-[0.15em] rounded-full shadow-lg">Щелепно-лицевий хірург</span>
+                        </div>
+                    </div>
+                    <div class="p-10">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-5 group-hover:text-teal-600 transition-colors leading-tight">Семенов<br>Денис Михайлович</h3>
+                        <div class="flex items-start space-x-4 p-4 bg-white rounded-2xl border border-slate-100 shadow-sm">
+                            <i data-lucide="graduation-cap" size="24" class="text-teal-600 flex-shrink-0"></i>
+                            <p class="text-slate-600 text-sm leading-relaxed">Фахівець вищої категорії. Проводить складні операції з імплантації та кісткової пластики.</p>
                         </div>
                     </div>
                 </div>
@@ -222,53 +242,61 @@
     </section>
 
     <!-- Contacts Section -->
-    <section id="contacts" class="py-24 bg-white border-t">
+    <section id="contacts" class="py-32 bg-white border-t border-slate-100">
         <div class="container mx-auto px-4 md:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
                 <div class="space-y-12">
-                    <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">Контакти</h2>
-                    <div class="space-y-8">
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center text-teal-600 mr-6"><i data-lucide="map-pin"></i></div>
+                    <div>
+                        <h2 class="text-4xl md:text-6xl font-bold text-slate-900 mb-8">Завжди на зв'язку</h2>
+                        <p class="text-slate-600 text-xl leading-relaxed">Запишіться на консультацію вже сьогодні та зробіть перший крок до здорової посмішки.</p>
+                    </div>
+                    <div class="space-y-10">
+                        <div class="flex items-center group">
+                            <div class="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center text-teal-600 mr-8 group-hover:bg-teal-600 group-hover:text-white transition-all"><i data-lucide="map-pin" size="32"></i></div>
                             <div>
-                                <h4 class="text-xl font-bold mb-1">Адреса</h4>
-                                <p class="text-slate-600">Запоріжжя, вул. Іванова 81б</p>
+                                <h4 class="text-2xl font-bold mb-1">Наша адреса</h4>
+                                <p class="text-slate-600 text-lg">Запоріжжя, вул. Іванова 81б</p>
                             </div>
                         </div>
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center text-teal-600 mr-6"><i data-lucide="phone"></i></div>
+                        <div class="flex items-center group">
+                            <div class="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center text-teal-600 mr-8 group-hover:bg-teal-600 group-hover:text-white transition-all"><i data-lucide="phone" size="32"></i></div>
                             <div>
-                                <h4 class="text-xl font-bold mb-1">Телефони</h4>
-                                <a href="tel:0979925212" class="block text-slate-600 hover:text-teal-600 transition-colors">097-992-52-12</a>
-                                <a href="tel:0669634357" class="block text-slate-600 hover:text-teal-600 transition-colors">066-963-43-57</a>
+                                <h4 class="text-2xl font-bold mb-1">Зворотній зв'язок</h4>
+                                <a href="tel:0979925212" class="block text-slate-600 text-lg hover:text-teal-600 transition-colors">097-992-52-12</a>
+                                <a href="tel:0669634357" class="block text-slate-600 text-lg hover:text-teal-600 transition-colors">066-963-43-57</a>
                             </div>
                         </div>
                     </div>
-                    <div class="flex space-x-4">
-                        <a href="https://www.instagram.com/denteya.stomatology" class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-pink-600 hover:bg-pink-600 hover:text-white transition-all"><i data-lucide="instagram"></i></a>
-                        <a href="https://t.me/+380979925212" class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-sky-600 hover:bg-sky-600 hover:text-white transition-all"><i data-lucide="send"></i></a>
+                    <div class="flex space-x-6 pt-4">
+                        <a href="https://www.instagram.com/denteya.stomatology" target="_blank" class="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center text-pink-600 hover:bg-pink-600 hover:text-white transition-all shadow-sm"><i data-lucide="instagram" size="32"></i></a>
+                        <a href="https://t.me/+380979925212" target="_blank" class="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center text-sky-600 hover:bg-sky-600 hover:text-white transition-all shadow-sm"><i data-lucide="send" size="32"></i></a>
                     </div>
                 </div>
-                <div class="h-[400px] rounded-3xl overflow-hidden border-8 border-slate-50 shadow-xl">
+                <div class="h-[600px] rounded-[3rem] overflow-hidden border-[12px] border-slate-50 shadow-2xl relative">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2678.9669530460337!2d35.1916364119934!3d47.82079087313045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40dc5f7375685827%3A0xe5a3c9a6224f8d97!2z0LLRg9C70LjRhtGPINCG0LLQsNC90L7QstCwLCA4MWIsINCX0LDQv9C-0YDRltC20LbRjywg0JfQsNC_0L7RgNGW0LfRjNC60LAg0L7QsdC70LDRgdGC0YwsIDY5MDYx!5e0!3m2!1suk!2sua!4v1709400000000!5m2!1suk!2sua" class="w-full h-full border-0" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-slate-900 text-slate-500 py-12 text-center">
+    <footer class="bg-slate-900 text-slate-500 py-20 text-center">
         <div class="container mx-auto px-4">
-            <p>© 2024 Стоматологія Дентея Запоріжжя. Всі права захищені.</p>
+            <div class="mb-10">
+                <img src="logo.jpg" alt="Дентея" class="h-16 mx-auto mb-6 brightness-0 invert opacity-40">
+                <div class="w-12 h-1 bg-teal-600/30 mx-auto rounded-full"></div>
+            </div>
+            <p class="text-lg">© 2002 Стоматологія Дентея Запоріжжя. Всі права захищені.</p>
+            <p class="text-sm mt-4 text-slate-600 italic">Ми піклуємось про вашу посмішку понад 20 років.</p>
         </div>
     </footer>
 
-    <div class="fixed bottom-6 right-6 z-40 flex flex-col space-y-4 md:hidden">
-        <a href="tel:0979925212" class="w-14 h-14 bg-teal-600 text-white rounded-full shadow-2xl flex items-center justify-center animate-pulse">
-            <i data-lucide="phone"></i>
+    <!-- Floating Action Button for Mobile -->
+    <div class="fixed bottom-8 right-8 z-40 md:hidden">
+        <a href="tel:0979925212" class="w-16 h-16 bg-teal-600 text-white rounded-full shadow-2xl flex items-center justify-center animate-bounce shadow-teal-600/50">
+            <i data-lucide="phone-call" size="32"></i>
         </a>
     </div>
 
     <script type="module" src="./index.tsx"></script>
 </body>
 </html>
-
