@@ -1,8 +1,4 @@
 
-// Initialize Lucide icons
-// @ts-ignore
-lucide.createIcons();
-
 // Navbar scroll effect
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
@@ -47,3 +43,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Initialize Lucide icons with error handling and retry
+function initIcons() {
+    // @ts-ignore
+    if (window.lucide) {
+        // @ts-ignore
+        window.lucide.createIcons();
+    } else {
+        setTimeout(initIcons, 100);
+    }
+}
+
+// Start icon initialization
+initIcons();
