@@ -25,8 +25,8 @@
         .doctor-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         .doctor-card:hover { transform: translateY(-10px); }
         
-        /* Плейсхолдер для зображень, поки вони не завантажені */
-        img { background-color: #f1f5f9; }
+        /* Плейсхолдер для зображень */
+        img { background-color: #f1f5f9; min-height: 50px; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
@@ -36,9 +36,9 @@
         <div class="container mx-auto px-4 md:px-8 flex justify-between items-center">
             <div class="flex items-center">
                 <a href="#" class="flex items-center space-x-4 group">
-                    <div class="logo-container bg-white p-1 rounded-xl shadow-lg">
-                        <!-- Зверніть увагу: файл має називатися logo.jpg -->
-                        <img src="logo.jpg" alt="Дентея" class="h-14 w-auto object-contain rounded-lg">
+                    <div class="logo-container bg-white p-1 rounded-xl shadow-lg border border-slate-100">
+                        <!-- ВАЖЛИВО: збережіть файл логотипу як logo.jpg у папку з сайтом -->
+                        <img src="./logo.jpg" alt="Дентея" class="h-14 w-auto object-contain rounded-lg" onerror="this.src='https://via.placeholder.com/150?text=LOGO'">
                     </div>
                     <span class="nav-brand-text text-2xl font-bold tracking-tight text-white transition-colors hidden lg:block">ДЕНТЕЯ</span>
                 </a>
@@ -88,7 +88,7 @@
                     Стоматологія Дентея
                 </div>
                 <h1 class="text-5xl md:text-8xl text-white font-bold leading-tight mb-8">Створюємо посмішки,<br><span class="text-teal-400">що надихають</span></h1>
-                <p class="text-xl md:text-2xl text-slate-200 mb-12 max-w-2xl leading-relaxed font-light">Повний комплекс послуг у Запоріжжі. Власна лабораторія, досвідчені лікарі та турбота про ваш комфорт з 2002 року.</p>
+                <p class="text-xl md:text-2xl text-slate-200 mb-12 max-w-2xl leading-relaxed font-light">Повний комплекс послуг у Запоріжжі з 2002 року. Власна лабораторія та лікарі-експерти.</p>
                 <div class="flex flex-col sm:flex-row gap-6">
                     <a href="tel:0979925212" class="bg-teal-600 hover:bg-teal-700 text-white px-10 py-5 rounded-2xl font-bold text-xl flex items-center justify-center transition-all shadow-2xl shadow-teal-900/40 hover:-translate-y-1">
                         <i data-lucide="phone-call" class="mr-3" size="24"></i> Записатись зараз
@@ -141,41 +141,6 @@
         </div>
     </section>
 
-    <!-- Lab Section -->
-    <section id="lab" class="py-32 bg-slate-900 text-white relative overflow-hidden">
-        <div class="container mx-auto px-4 md:px-8 flex flex-col lg:flex-row items-center gap-20">
-            <div class="flex-1 space-y-10 relative z-10">
-                <div class="inline-flex items-center px-5 py-2 rounded-full bg-teal-500/20 border border-teal-500/30 text-teal-400 font-bold text-sm tracking-widest uppercase">
-                    <i data-lucide="microscope" class="mr-3" size="20"></i> Цифрова лабораторія
-                </div>
-                <h2 class="text-4xl md:text-6xl font-bold leading-tight">Власне виробництво — гарантія швидкості</h2>
-                <p class="text-slate-400 text-xl leading-relaxed">Наявність власної зуботехнічної лабораторії дозволяє нам контролювати естетику та точність кожної коронки чи вініра без посередників.</p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div class="flex items-center space-x-4 p-4 bg-white/5 rounded-2xl border border-white/10">
-                        <i data-lucide="check-circle-2" class="text-teal-500"></i>
-                        <span class="text-lg">CAD/CAM фрезерування</span>
-                    </div>
-                    <div class="flex items-center space-x-4 p-4 bg-white/5 rounded-2xl border border-white/10">
-                        <i data-lucide="check-circle-2" class="text-teal-500"></i>
-                        <span class="text-lg">3D-друк моделей</span>
-                    </div>
-                    <div class="flex items-center space-x-4 p-4 bg-white/5 rounded-2xl border border-white/10">
-                        <i data-lucide="check-circle-2" class="text-teal-500"></i>
-                        <span class="text-lg">Цирконієві коронки</span>
-                    </div>
-                    <div class="flex items-center space-x-4 p-4 bg-white/5 rounded-2xl border border-white/10">
-                        <i data-lucide="check-circle-2" class="text-teal-500"></i>
-                        <span class="text-lg">Кераміка E-max</span>
-                    </div>
-                </div>
-            </div>
-            <div class="flex-1 relative group">
-                <div class="absolute inset-0 bg-teal-600 rounded-3xl blur-3xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
-                <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Dental lab" class="relative w-full h-[500px] object-cover rounded-3xl shadow-2xl transition-transform duration-700 group-hover:scale-[1.02]">
-            </div>
-        </div>
-    </section>
-
     <!-- Team Section -->
     <section id="team" class="py-32 bg-white">
         <div class="container mx-auto px-4 md:px-8">
@@ -189,8 +154,8 @@
                 <!-- Doctor 1: Пальчик -->
                 <div class="doctor-card group bg-slate-50 rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl border border-slate-100">
                     <div class="h-[450px] overflow-hidden relative bg-slate-200">
-                        <!-- Файл має називатися photo_5348583036851181983_y.jpg -->
-                        <img src="photo_5348583036851181983_y.jpg" alt="Пальчик Оксана Олександрівна" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <!-- ВАЖЛИВО: збережіть файл як photo_5348583036851181983_y.jpg -->
+                        <img src="./photo_5348583036851181983_y.jpg" alt="Пальчик Оксана Олександрівна" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://via.placeholder.com/400x500?text=Пальчик+О.О.'">
                         <div class="absolute top-6 left-6">
                             <span class="px-4 py-1.5 bg-white/95 backdrop-blur-md text-teal-600 font-bold text-xs uppercase tracking-[0.15em] rounded-full shadow-lg">Стоматолог-ортодонт</span>
                         </div>
@@ -207,7 +172,8 @@
                 <!-- Doctor 2: Лазорко -->
                 <div class="doctor-card group bg-slate-50 rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl border border-slate-100">
                     <div class="h-[450px] overflow-hidden relative bg-slate-200">
-                        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=800&q=80" alt="Лазорко Мар'ян Мар'янович" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <!-- ВАЖЛИВО: збережіть нове фото як photo_lazorko.jpg у ту ж папку -->
+                        <img src="./photo_lazorko.jpg" alt="Лазорко Мар'ян Мар'янович" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://via.placeholder.com/400x500?text=Лазорко+М.М.'">
                         <div class="absolute top-6 left-6">
                             <span class="px-4 py-1.5 bg-white/95 backdrop-blur-md text-teal-600 font-bold text-xs uppercase tracking-[0.15em] rounded-full shadow-lg">Стоматолог-ортопед</span>
                         </div>
@@ -248,20 +214,20 @@
                 <div class="space-y-12">
                     <div>
                         <h2 class="text-4xl md:text-6xl font-bold text-slate-900 mb-8">Завжди на зв'язку</h2>
-                        <p class="text-slate-600 text-xl leading-relaxed">Запишіться на консультацію вже сьогодні та зробіть перший крок до здорової посмішки.</p>
+                        <p class="text-slate-600 text-xl leading-relaxed">Запоріжжя, вул. Іванова 81б. Ми працюємо для вашого здоров'я.</p>
                     </div>
                     <div class="space-y-10">
                         <div class="flex items-center group">
-                            <div class="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center text-teal-600 mr-8 group-hover:bg-teal-600 group-hover:text-white transition-all"><i data-lucide="map-pin" size="32"></i></div>
+                            <div class="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center text-teal-600 mr-8 group-hover:bg-teal-600 group-hover:text-white transition-all shadow-sm"><i data-lucide="map-pin" size="32"></i></div>
                             <div>
-                                <h4 class="text-2xl font-bold mb-1">Наша адреса</h4>
-                                <p class="text-slate-600 text-lg">Запоріжжя, вул. Іванова 81б</p>
+                                <h4 class="text-2xl font-bold mb-1">Адреса</h4>
+                                <p class="text-slate-600 text-lg">вул. Іванова 81б</p>
                             </div>
                         </div>
                         <div class="flex items-center group">
-                            <div class="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center text-teal-600 mr-8 group-hover:bg-teal-600 group-hover:text-white transition-all"><i data-lucide="phone" size="32"></i></div>
+                            <div class="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center text-teal-600 mr-8 group-hover:bg-teal-600 group-hover:text-white transition-all shadow-sm"><i data-lucide="phone" size="32"></i></div>
                             <div>
-                                <h4 class="text-2xl font-bold mb-1">Зворотній зв'язок</h4>
+                                <h4 class="text-2xl font-bold mb-1">Телефони</h4>
                                 <a href="tel:0979925212" class="block text-slate-600 text-lg hover:text-teal-600 transition-colors">097-992-52-12</a>
                                 <a href="tel:0669634357" class="block text-slate-600 text-lg hover:text-teal-600 transition-colors">066-963-43-57</a>
                             </div>
@@ -272,21 +238,20 @@
                         <a href="https://t.me/+380979925212" target="_blank" class="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center text-sky-600 hover:bg-sky-600 hover:text-white transition-all shadow-sm"><i data-lucide="send" size="32"></i></a>
                     </div>
                 </div>
-                <div class="h-[600px] rounded-[3rem] overflow-hidden border-[12px] border-slate-50 shadow-2xl relative">
+                <div class="h-[500px] rounded-[3rem] overflow-hidden border-[12px] border-slate-50 shadow-2xl relative">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2678.9669530460337!2d35.1916364119934!3d47.82079087313045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40dc5f7375685827%3A0xe5a3c9a6224f8d97!2z0LLRg9C70LjRhtGPINCG0LLQsNC90L7QstCwLCA4MWIsINCX0LDQv9C-0YDRltC20LbRjywg0JfQsNC_0L7RgNGW0LfRjNC60LAg0L7QsdC70LDRgdGC0YwsIDY5MDYx!5e0!3m2!1suk!2sua!4v1709400000000!5m2!1suk!2sua" class="w-full h-full border-0" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-slate-900 text-slate-500 py-20 text-center">
+    <footer class="bg-slate-900 text-slate-500 py-16 text-center">
         <div class="container mx-auto px-4">
-            <div class="mb-10">
-                <img src="logo.jpg" alt="Дентея" class="h-16 mx-auto mb-6 brightness-0 invert opacity-40">
+            <div class="mb-8">
+                <img src="./logo.jpg" alt="Дентея" class="h-16 mx-auto mb-6 brightness-0 invert opacity-40" onerror="this.style.display='none'">
                 <div class="w-12 h-1 bg-teal-600/30 mx-auto rounded-full"></div>
             </div>
             <p class="text-lg">© 2002 Стоматологія Дентея Запоріжжя. Всі права захищені.</p>
-            <p class="text-sm mt-4 text-slate-600 italic">Ми піклуємось про вашу посмішку понад 20 років.</p>
         </div>
     </footer>
 
